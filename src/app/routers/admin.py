@@ -7,7 +7,7 @@ from helpers.auth import create_access_token, verify_password
 from database.schemas import AdminBase, AdminSchema, Token
 from database.queries import Admin
 from database.db import get_db
-from middleware.auth import is_autheticated
+from middleware.auth import is_authenticated
 
 from exceptions.admin import admin_not_found_exception, incorrect_password_exception, admin_already_exists_exception
 
@@ -47,7 +47,7 @@ def register(body: AdminBase, _ : int = Depends(is_autheticated), db: Session = 
     return Token(access_token=str(access_token))
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=AdminSchema)
-def get_admin(admin_id: int = Depends(is_autheticated), db: Session = Depends(get_db)):
+def get_admin(admin_id: int = Depends(is_authenticated), db: Session = Depends(get_db)):
     admin = Admin.get_admin_by_id(admin_id,db)
     if not admin:
         raise admin_not_found_exception
