@@ -11,16 +11,25 @@ $ git clone https://github.com/DSC-VJTI/Boutique-Server
 2. Create a `virtual environment` and install the requirements
 
 ```bash
-$ pip install -r requirements.txt
+$ pip install -r requirements_dev.txt
 ```
 
-3. You need to set the following environment variables
+3. Install `pre-commit` hooks
+
+```bash
+$ pre-commit install
+```
+
+4. You need to set the following environment variables
 
 ```
+  SECRET_KEY                    // JWT secret
+  ALGORITHM                     // Algorithm for encoding JWT
+  ACCESS_TOKEN_EXPIRE_MINUTES   // JWT token expiration in minutes
   DATABASE_URL                  // Database URL
 ```
 
-4. Run the project
+5. Run the project
 
   - Using `main.py`
 

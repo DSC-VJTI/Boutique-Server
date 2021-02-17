@@ -28,8 +28,8 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install Dependencies
-        run: pip install black
+        run: pip install flake8
         if: steps.cache.output.cache-hits != 'true'
 
-      - name: Format Code
-        run: black .
+      - name: Lint Code
+        run: flake8 .
