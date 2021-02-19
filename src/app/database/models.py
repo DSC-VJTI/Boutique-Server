@@ -1,6 +1,9 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
 
 from .db import Base
+
 
 class Admin(Base):
     __tablename__ = "admins"

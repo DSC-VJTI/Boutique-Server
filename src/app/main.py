@@ -1,7 +1,8 @@
-from fastapi import FastAPI, status
-from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 import uvicorn
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi import status
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -11,7 +12,7 @@ from routers import admin
 
 Base.metadata.create_all(bind=engine)
 
-origins = ['localhost:8080']
+origins = ["localhost:8080"]
 
 app = FastAPI()
 
@@ -25,11 +26,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/", status_code=status.HTTP_200_OK, tags=["API Check"])
 def check():
-    return {
-        "message": "Hello World!"
-    }
+    return {"message": "Hello World!"}
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     uvicorn.run(app)
