@@ -8,7 +8,7 @@ load_dotenv()
 
 from database.db import Base, engine
 
-from routers import admin
+from routers import admin, blog
 
 Base.metadata.create_all(bind=engine)
 
@@ -17,6 +17,7 @@ origins = ["localhost:8080"]
 app = FastAPI()
 
 app.include_router(admin.router)
+app.include_router(blog.router)
 
 app.add_middleware(
     CORSMiddleware,
