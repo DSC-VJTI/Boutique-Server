@@ -12,7 +12,7 @@ from routers import admin, blog
 
 Base.metadata.create_all(bind=engine)
 
-origins = ["localhost:8080"]
+origins = ["http://localhost:8080"]
 
 app = FastAPI()
 
