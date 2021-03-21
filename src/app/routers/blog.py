@@ -42,7 +42,12 @@ def create_blog(
 @router.put(
     "/{blog_id}", status_code=status.HTTP_200_OK, response_model=BlogSchema
 )
-def update_blog(blog_id: int, blog: BlogBase, db: Session = Depends(get_db)):
+def update_blog(
+    blog_id: int,
+    blog: BlogBase,
+    _: int = Depends(is_authenticated),
+    db: Session = Depends(get_db),
+):
     return Blog.update_blog(blog_id, blog, db)
 
 
