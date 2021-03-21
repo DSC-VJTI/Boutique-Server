@@ -52,6 +52,10 @@ def update_blog(
 
 
 @router.delete("/{blog_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_blog(blog_id: int, db: Session = Depends(get_db)):
+def delete_blog(
+    blog_id: int,
+    _: int = Depends(is_authenticated),
+    db: Session = Depends(get_db),
+):
     Blog.delete_blog(blog_id, db)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
