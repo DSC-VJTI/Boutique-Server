@@ -2,10 +2,10 @@ import os
 from datetime import timedelta
 
 from database.db import get_db
-from database.queries import Admin
-from database.schemas import AdminBase
-from database.schemas import AdminSchema
-from database.schemas import Token
+from database.queries.admin import Admin
+from database.schemas.admin import AdminBase
+from database.schemas.admin import AdminSchema
+from database.schemas.token import Token
 from exceptions.admin import admin_not_found_exception
 from exceptions.admin import incorrect_password_exception
 from fastapi import APIRouter
