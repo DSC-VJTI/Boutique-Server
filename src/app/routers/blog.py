@@ -1,9 +1,9 @@
 from typing import List
 
 from database.db import get_db
-from database.queries import Blog
-from database.schemas import BlogBase
-from database.schemas import BlogSchema
+from database.queries.blog import Blog
+from database.schemas.blog import BlogBase
+from database.schemas.blog import BlogSchema
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import Response
