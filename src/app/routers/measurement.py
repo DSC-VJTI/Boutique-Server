@@ -65,7 +65,7 @@ def update_measurement(
 
 
 @router.delete("/{m_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_blog(
+def delete_measurement(
     m_id: int,
     _: int = Depends(is_authenticated),
     db: Session = Depends(get_db),
