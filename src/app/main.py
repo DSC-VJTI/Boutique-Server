@@ -8,7 +8,7 @@ load_dotenv()
 
 from database.db import Base, engine
 
-from routers import admin, blog, measurement, material 
+from routers import admin, blog, measurement, material
 
 Base.metadata.create_all(bind=engine)
 
