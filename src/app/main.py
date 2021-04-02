@@ -8,7 +8,7 @@ load_dotenv()
 
 from database.db import Base, engine
 
-from routers import admin, blog, measurement
+from routers import admin, blog, measurement, material
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +19,7 @@ app = FastAPI()
 app.include_router(admin.router)
 app.include_router(blog.router)
 app.include_router(measurement.router)
+app.include_router(material.router)
 
 app.add_middleware(
     CORSMiddleware,
