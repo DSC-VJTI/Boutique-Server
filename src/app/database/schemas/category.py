@@ -9,7 +9,8 @@ class CategoryBase(BaseModel):
 
 class CategorySchema(CategoryBase):
     id: int
-    sub_categories: List
+    sub_categories: List = []
+    products: List = []
 
     class Config:
         orm_mode = True
@@ -20,9 +21,11 @@ class SubCategoryBase(BaseModel):
     category_name: str
 
 
-class SubCategorySchema(SubCategoryBase):
+class SubCategorySchema(BaseModel):
     id: int
-    products: List
+    name: str
+    category_id: int
+    products: List = []
 
     class Config:
         orm_mode = True
