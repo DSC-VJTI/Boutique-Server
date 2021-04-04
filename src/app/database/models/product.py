@@ -11,7 +11,7 @@ from ..db import Base
 from .category import Category
 from .category import SubCategory
 
-product_sub_category_association_table = Table(
+product_sub_category_table = Table(
     "products_sub_categories",
     Base.metadata,
     Column("product_id", Integer, ForeignKey("products.id")),
@@ -35,6 +35,6 @@ class Product(Base):
 
     sub_categories = relationship(
         SubCategory,
-        secondary=product_sub_category_association_table,
+        secondary=product_sub_category_table,
         backref=backref("products", lazy="joined"),
     )
