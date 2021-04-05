@@ -37,7 +37,9 @@ class Product:
         db_product = product_model.Product(
             name=p.name,
             description=p.description,
+            info=p.info,
             price=p.price,
+            discount_price=p.discount_price,
             category_id=db_category.id,
         )
         db.add(db_product)
@@ -60,7 +62,9 @@ class Product:
 
         db_product.name = p.name
         db_product.description = p.description
+        db_product.info = p.info
         db_product.price = p.price
+        db_product.discount_price = p.discount_price
         db_product.category_id = db_category.id
 
         db.add(db_product)

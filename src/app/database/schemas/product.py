@@ -6,7 +6,9 @@ from pydantic import BaseModel
 class ProductBase(BaseModel):
     name: str
     description: str
+    info: str
     price: float
+    discount_price: float
     category_name: str
     sub_categories: List
 
