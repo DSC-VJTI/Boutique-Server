@@ -8,7 +8,15 @@ load_dotenv()
 
 from database.db import Base, engine
 
-from routers import admin, blog, measurement, material, category, product
+from routers import (
+    admin,
+    blog,
+    measurement,
+    material,
+    category,
+    sub_category,
+    product,
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,8 +28,8 @@ app.include_router(admin.router)
 app.include_router(blog.router)
 app.include_router(measurement.router)
 app.include_router(material.router)
-app.include_router(category.cat_router)
-app.include_router(category.sub_cat_router)
+app.include_router(category.router)
+app.include_router(sub_category.router)
 app.include_router(product.router)
 
 app.add_middleware(
