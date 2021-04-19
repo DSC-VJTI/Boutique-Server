@@ -11,4 +11,5 @@ def product_model_to_schema(product: Product, db: Session):
     ).name
     p_dict.pop("category_id")
     p_dict["sub_categories"] = [s.name for s in product.sub_categories]
+    p_dict["images"] = [p.image_url for p in product.images]
     return ProductSchema(**p_dict)

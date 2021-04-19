@@ -11,6 +11,7 @@ class ProductBase(BaseModel):
     discount_price: float
     category_name: str
     sub_categories: List
+    images: List
 
 
 class ProductSchema(ProductBase):

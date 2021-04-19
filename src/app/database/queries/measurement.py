@@ -5,6 +5,7 @@ from exceptions.measurement import measurement_not_found_exception
 from sqlalchemy.orm import Session
 
 from ..models import measurement as m_model
+from ..models.measurement_images import MeasurementImage
 
 
 class Measurement:

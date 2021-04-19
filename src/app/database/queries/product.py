@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from ..models import product as product_model
+from ..models.product_images import ProductImage
 from ..schemas.product import ProductBase
 from .category import Category
 from .category import SubCategory
@@ -47,6 +48,10 @@ class Product:
             db_sub_category = SubCategory.get_sub_category_by_name(s, db)
             db_sub_category.products.append(db_product)
             db.add(db_sub_category)
+        for product_image in p.images:
+            new_image = ProductImage(image_url=product_image)
+            db_product.images.append(new_image)
+            db.add(new_image)
 
         try:
             db.commit()
@@ -59,6 +64,7 @@ class Product:
         db_product = Product.get_product_by_id(p_id, db)
         db_category = Category.get_category_by_name(p.category_name, db)
         db_product.sub_categories.clear()
+        db_product.images.clear()
 
         db_product.name = p.name
         db_product.description = p.description
@@ -73,6 +79,11 @@ class Product:
             db_sub_category = SubCategory.get_sub_category_by_name(s, db)
             db_sub_category.products.append(db_product)
             db.add(db_sub_category)
+
+        for image_url in p.images:
+            new_image = ProductImage(image_url=image_url)
+            db_product.images.append(new_image)
+            db.add(new_image)
 
         try:
             db.commit()
