@@ -35,8 +35,14 @@ class Measurement:
     @staticmethod
     def create_measurement(m: Dict[str, str], db: Session):
         today = date.today()
+        url_list=m["images"]
+        del m["images"]
         db_m = m_model.Measurement(**m, created_on=today, last_updated=today)
         db.add(db_m)
+        for url in url_list:
+            new_image=MeasurementImage(image_url=url)
+            db_m.images.append(new_image)
+            db.add(new_image)
         db.commit()
         db.refresh(db_m)
         return db_m
