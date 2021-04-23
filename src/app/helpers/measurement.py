@@ -18,5 +18,5 @@ def deserialize(m: Measurement) -> Dict[str, Dict[str, str]]:
     m_dict = m.__dict__
     for key in keys:
         m_dict[key] = json.loads(m_dict[key])
-    m_dict["images"]=[x.image_url for x in m.images]
+    m_dict["images"] = [x.image_url for x in m.images]
     return m_dict
