@@ -7,9 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 from database.db import Base, engine
-from database.models.measurement_images import (
-    MeasurementImage,
-)  # https://stackoverflow.com/a/57271213/12370518
+from database.models.measurement_images import MeasurementImage  # noqa: F401
 
 from routers import (
     admin,

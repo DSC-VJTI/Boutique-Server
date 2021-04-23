@@ -1,4 +1,5 @@
-from fastapi import HTTPException, status
+from fastapi import HTTPException
+from fastapi import status
 
 token_exception = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
