@@ -49,11 +49,18 @@ class Measurement:
 
     @staticmethod
     def update_measurement(m_id: int, m: Dict[str, str], db: Session):
-        _ = Measurement.get_measurement_by_id(m_id, db)
+        db_m = Measurement.get_measurement_by_id(m_id, db)
         m["last_updated"] = date.today()
+        url_list=m["images"]
+        del m["images"]
+        db_m.images.clear()
         db.query(m_model.Measurement).filter(
             m_model.Measurement.id == m_id
         ).update(m, synchronize_session="fetch")
+        for url in url_list:
+            new_image=MeasurementImage(image_url=url)
+            db_m.images.append(new_image)
+            db.add(new_image)
         db.commit()
         return Measurement.get_measurement_by_id(m_id, db)
 
