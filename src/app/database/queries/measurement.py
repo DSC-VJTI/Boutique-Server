@@ -35,12 +35,11 @@ class Measurement:
     @staticmethod
     def create_measurement(m: Dict[str, str], db: Session):
         today = date.today()
-        url_list=m["images"]
-        del m["images"]
+        url_list = m.pop("images")
         db_m = m_model.Measurement(**m, created_on=today, last_updated=today)
         db.add(db_m)
         for url in url_list:
-            new_image=MeasurementImage(image_url=url)
+            new_image = MeasurementImage(image_url=url)
             db_m.images.append(new_image)
             db.add(new_image)
         db.commit()
@@ -51,14 +50,13 @@ class Measurement:
     def update_measurement(m_id: int, m: Dict[str, str], db: Session):
         db_m = Measurement.get_measurement_by_id(m_id, db)
         m["last_updated"] = date.today()
-        url_list=m["images"]
-        del m["images"]
+        url_list = m.pop("images")
         db_m.images.clear()
         db.query(m_model.Measurement).filter(
             m_model.Measurement.id == m_id
         ).update(m, synchronize_session="fetch")
         for url in url_list:
-            new_image=MeasurementImage(image_url=url)
+            new_image = MeasurementImage(image_url=url)
             db_m.images.append(new_image)
             db.add(new_image)
         db.commit()
