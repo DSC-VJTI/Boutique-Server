@@ -1,5 +1,6 @@
 from datetime import date
 from typing import Dict
+from typing import List
 
 from pydantic import BaseModel
 
@@ -25,6 +26,8 @@ class MeasurementBase(BaseModel):
     bottom_c: str
     bottom_k: str
     bottom_r: str
+
+    images: List
 
 
 class MeasurementSchema(MeasurementBase):

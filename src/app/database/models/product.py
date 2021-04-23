@@ -40,3 +40,5 @@ class Product(Base):
         secondary=product_sub_category_table,
         backref=backref("products", lazy="joined"),
     )
+
+    images = relationship("ProductImage", cascade="delete", backref="products")
