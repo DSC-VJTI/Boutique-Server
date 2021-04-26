@@ -21,7 +21,7 @@ from routers import (
 
 Base.metadata.create_all(bind=engine)
 
-origins = ["http://localhost:8080"]
+origins = ["http://localhost:8080", "https://client-boutique.netlify.app"]
 
 app = FastAPI()
 
