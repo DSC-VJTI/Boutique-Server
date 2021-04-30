@@ -1,7 +1,7 @@
 ---
 application:
   name: "boutique-server"
-  project: "boutique-server"
+  project: "Boutique-Store"
   organization: "QoveryCommunity"
 databases:
 - type: "POSTGRESQL"
