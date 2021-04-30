@@ -1,0 +1,15 @@
+---
+application:
+  name: "boutique-server"
+  project: "boutique-server"
+  organization: "QoveryCommunity"
+databases:
+- type: "POSTGRESQL"
+  name: "boutique"
+  version: "12"
+routers:
+- name: "main-boutique-server"
+  routes:
+  - application_name: "boutique-server"
+    paths:
+    - "/*"
