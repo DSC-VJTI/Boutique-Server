@@ -3,6 +3,7 @@ application:
   name: "boutique-server"
   project: "Boutique-Store"
   organization: "QoveryCommunity"
+  dockerfile: "./Dockerfile"
 databases:
 - type: "POSTGRESQL"
   name: "boutique"

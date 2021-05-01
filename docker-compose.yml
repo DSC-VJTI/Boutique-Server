@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=boutique
+      - POSTGRES_USER=dbadmin
+      - POSTGRES_PASSWORD=secretpass
+    volumes:
+        - ./dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
