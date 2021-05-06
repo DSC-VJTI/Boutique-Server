@@ -39,7 +39,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    allow_origin_regex='^https://deploy-preview-[0-9]+--client-boutique\.netlify\.app$',
+    allow_origin_regex='^https://deploy-preview-[0-9]+--client-boutique.netlify.app$',  # noqa: E501
 )
 
 
