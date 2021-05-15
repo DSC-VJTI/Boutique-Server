@@ -9,7 +9,7 @@ from fastapi import Depends
 from fastapi import Response
 from fastapi import status
 from helpers.product import product_model_to_schema
-from middleware.auth import is_authenticated
+from middleware.auth import is_admin
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/api/admin/products", tags=["products"])
@@ -61,7 +61,7 @@ def get_products_by_sub_category(s_id: int, db: Session = Depends(get_db)):
 )
 def create_product(
     p: ProductBase,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return product_model_to_schema(Product.create_product(p, db), db)
@@ -73,7 +73,7 @@ def create_product(
 def update_product(
     p_id: int,
     p: ProductBase,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return product_model_to_schema(Product.update_product(p_id, p, db), db)
@@ -82,7 +82,7 @@ def update_product(
 @router.delete("/{p_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_product(
     p_id: int,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     Product.delete_product(p_id, db)

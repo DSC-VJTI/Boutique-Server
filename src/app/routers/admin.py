@@ -14,6 +14,7 @@ from fastapi import Depends
 from fastapi import status
 from helpers.auth import create_access_token
 from helpers.auth import verify_password
+from middleware.auth import is_admin
 from middleware.auth import is_authenticated
 from sqlalchemy.orm import Session
 
@@ -50,7 +51,7 @@ def login(
 )
 def register(
     body: AdminBase,
-    # _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     admin = Admin.create_admin(body, db)

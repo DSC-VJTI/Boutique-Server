@@ -21,3 +21,8 @@ admin_already_exists_exception = HTTPException(
     status_code=status.HTTP_400_BAD_REQUEST,
     detail="Admin already exists",
 )
+
+sub_admin_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="You don't have permissions to access this resource",
+)
