@@ -35,10 +35,14 @@ def login(
         minutes=int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES"))
     )
     access_token = create_access_token(
-        data={"id": admin.id, "username": admin.username},
+        data={
+            "id": admin.id,
+            "username": admin.username,
+            "is_admin": admin.is_admin,
+        },
         expires_delta=access_token_expires,
     )
-    return Token(access_token=str(access_token))
+    return Token(access_token=str(access_token), is_admin=admin.is_admin)
 
 
 @router.post(
@@ -46,7 +50,7 @@ def login(
 )
 def register(
     body: AdminBase,
-    _: int = Depends(is_authenticated),
+    # _: int = Depends(is_authenticated),
     db: Session = Depends(get_db),
 ):
     admin = Admin.create_admin(body, db)
@@ -54,10 +58,14 @@ def register(
         minutes=int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES"))
     )
     access_token = create_access_token(
-        data={"id": admin.id, "username": admin.username},
+        data={
+            "id": admin.id,
+            "username": admin.username,
+            "is_admin": admin.is_admin,
+        },
         expires_delta=access_token_expires,
     )
-    return Token(access_token=str(access_token))
+    return Token(access_token=str(access_token), is_admin=admin.is_admin)
 
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=AdminSchema)

@@ -1,3 +1,4 @@
+from sqlalchemy import Boolean
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
@@ -13,5 +14,6 @@ class Admin(Base):
     username = Column(String, unique=True, index=True)
     full_name = Column(String)
     password = Column(String)
+    is_admin = Column(Boolean)
 
     blogs = relationship("Blog", lazy="joined")
