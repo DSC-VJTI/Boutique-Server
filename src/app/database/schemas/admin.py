@@ -6,6 +6,7 @@ class AdminBase(BaseModel):
     username: str
     full_name: str
     password: str
+    is_admin: bool
 
 
 # Schema class is schema for response body and db object

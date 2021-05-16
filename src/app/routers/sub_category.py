@@ -8,7 +8,7 @@ from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import Response
 from fastapi import status
-from middleware.auth import is_authenticated
+from middleware.auth import is_admin
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/api/admin/sub_categories", tags=["sub-categories"])
@@ -33,7 +33,7 @@ def get_sub_category_by_id(s_id: int, db: Session = Depends(get_db)):
 )
 def create_sub_category(
     s: SubCategoryBase,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return SubCategory.create_sub_category(s, db)
@@ -45,7 +45,7 @@ def create_sub_category(
 def update_sub_category(
     s_id: int,
     s: SubCategoryBase,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return SubCategory.update_sub_category(s_id, s, db)
@@ -54,7 +54,7 @@ def update_sub_category(
 @router.delete("/{s_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_sub_category(
     s_id: int,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     SubCategory.delete_sub_category(s_id, db)

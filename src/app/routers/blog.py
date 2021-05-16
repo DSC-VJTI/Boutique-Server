@@ -8,6 +8,7 @@ from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import Response
 from fastapi import status
+from middleware.auth import is_admin
 from middleware.auth import is_authenticated
 from sqlalchemy.orm import Session
 
@@ -34,6 +35,7 @@ def get_blog_by_id(blog_id: int, db: Session = Depends(get_db)):
 def create_blog(
     blog: BlogBase,
     admin_id: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return Blog.create_blog(admin_id, blog, db)
@@ -45,7 +47,7 @@ def create_blog(
 def update_blog(
     blog_id: int,
     blog: BlogBase,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     return Blog.update_blog(blog_id, blog, db)
@@ -54,7 +56,7 @@ def update_blog(
 @router.delete("/{blog_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_blog(
     blog_id: int,
-    _: int = Depends(is_authenticated),
+    _: bool = Depends(is_admin),
     db: Session = Depends(get_db),
 ):
     Blog.delete_blog(blog_id, db)

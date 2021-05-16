@@ -5,6 +5,7 @@ from typing import Dict
 from typing import Optional
 
 from jose import jwt
+from jose.exceptions import JWTError
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -31,3 +32,15 @@ def create_access_token(data: Dict, expires_delta: Optional[timedelta] = None):
         algorithm=os.environ.get("ALGORITHM"),
     )
     return encoded_jwt
+
+
+def get_field_from_token(token: str, field: str):
+    try:
+        payload = jwt.decode(
+            token,
+            os.environ.get("SECRET_KEY"),
+            algorithms=os.environ.get("ALGORITHM"),
+        )
+        return payload.get(field)
+    except JWTError:
+        raise JWTError
