@@ -15,5 +15,6 @@ class Blog(Base):
     content = Column(String)
     created_on = Column(Date)
     last_updated = Column(Date)
+    image = Column(String)
 
     author_id = Column(Integer, ForeignKey("admins.id"))

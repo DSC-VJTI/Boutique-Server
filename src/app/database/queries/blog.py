@@ -61,6 +61,7 @@ class Blog:
             raise blog_not_found_exception
         db_blog.title = blog.title
         db_blog.content = blog.content
+        db_blog.image = blog.image
         db_blog.last_updated = date.today()
         db.commit()
         db.refresh(db_blog)
