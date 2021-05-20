@@ -1,3 +1,5 @@
+from datetime import date
+
 from pydantic import BaseModel
 
 
@@ -21,6 +23,8 @@ class MaterialBase(BaseModel):
 
 class MaterialSchema(MaterialBase):
     id: int
+    created_on: date
+    last_updated: date
 
     class Config:
         orm_mode = True

@@ -1,3 +1,5 @@
+from datetime import date
+
 from exceptions.material import material_not_found_exception
 from sqlalchemy.orm import Session
 
@@ -31,7 +33,10 @@ class Material:
 
     @staticmethod
     def create_material(m: MaterialBase, db: Session):
-        db_m = m_model.Material(**m.dict())
+        today = date.today()
+        db_m = m_model.Material(
+            **m.dict(), created_on=today, last_updated=today
+        )
         db.add(db_m)
         db.commit()
         db.refresh(db_m)
@@ -40,8 +45,10 @@ class Material:
     @staticmethod
     def update_material(m_id: int, m: MaterialBase, db: Session):
         _ = Material.get_material_by_id(m_id, db)
+        m_dict = m.dict()
+        m_dict["last_updated"] = date.today()
         db.query(m_model.Material).filter(m_model.Material.id == m_id).update(
-            m, synchronize_session="fetch"
+            m_dict, synchronize_session="fetch"
         )
         db.commit()
         return Material.get_material_by_id(m_id, db)
