@@ -10,4 +10,6 @@ class MeasurementImage(Base):
     __tablename__ = "measurement_images"
     id = Column(Integer, primary_key=True, index=True)
     image_url = Column(String)
-    measurement_id = Column(Integer, ForeignKey("measurements.id"))
+    measurement_id = Column(
+        Integer, ForeignKey("measurements.id", ondelete="CASCADE")
+    )
