@@ -23,6 +23,15 @@ def get_all_carousel_items(db: Session = Depends(get_db)):
     return CarouselItem.get_all_carousel_items(db)
 
 
+@router.get(
+    "/{c_item_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=CarouselItemSchema,
+)
+def get_carousel_item_by_id(c_item_id: int, db: Session = Depends(get_db)):
+    return CarouselItem.get_carousel_item_by_id(c_item_id, db)
+
+
 @router.post(
     "/", status_code=status.HTTP_201_CREATED, response_model=CarouselItemSchema
 )
