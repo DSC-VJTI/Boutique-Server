@@ -19,6 +19,7 @@ from routers import (
     product,
     carousel_item,
     collection,
+    instagram,
 )
 
 Base.metadata.create_all(bind=engine)
@@ -36,6 +37,7 @@ app.include_router(sub_category.router)
 app.include_router(product.router)
 app.include_router(carousel_item.router)
 app.include_router(collection.router)
+app.include_router(instagram.router)
 
 app.add_middleware(
     CORSMiddleware,
