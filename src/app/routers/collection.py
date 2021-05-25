@@ -23,6 +23,13 @@ def get_all_collections(db: Session = Depends(get_db)):
     return Collection.get_all_collections(db)
 
 
+@router.get(
+    "/{c_id}", status_code=status.HTTP_200_OK, response_model=CollectionSchema
+)
+def get_collection_by_id(c_id: int, db: Session = Depends(get_db)):
+    return Collection.get_collection_by_id(c_id, db)
+
+
 @router.post(
     "/", status_code=status.HTTP_201_CREATED, response_model=CollectionSchema
 )
