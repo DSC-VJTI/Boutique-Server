@@ -17,6 +17,7 @@ from routers import (
     category,
     sub_category,
     product,
+    carousel_item,
 )
 
 Base.metadata.create_all(bind=engine)
@@ -32,6 +33,7 @@ app.include_router(material.router)
 app.include_router(category.router)
 app.include_router(sub_category.router)
 app.include_router(product.router)
+app.include_router(carousel_item.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -39,7 +41,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    allow_origin_regex='^https://deploy-preview-[0-9]+--client-boutique.netlify.app$',  # noqa: E501
+    allow_origin_regex="^https://deploy-preview-[0-9]+--client-boutique.netlify.app$",  # noqa: E501
 )
 
 
