@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 class MaterialBase(BaseModel):
     client_name: str
+    notes: str
     top: str
     bottom: str
     dupatta: str

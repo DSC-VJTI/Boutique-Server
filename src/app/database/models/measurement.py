@@ -12,6 +12,7 @@ class Measurement(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     client_name = Column(String)
+    notes = Column(String)
     created_on = Column(Date)
     last_updated = Column(Date)
 
