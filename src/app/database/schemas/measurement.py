@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 class MeasurementBase(BaseModel):
     client_name: str
+    notes: str
     dl: str
     l: Dict[str, str]
     ac: str
